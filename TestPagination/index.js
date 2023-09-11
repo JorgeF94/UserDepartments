@@ -136,12 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
           if (lastPage > 0) {
-            AddPagination();
+            InitPagination();
             CheckPagination();
           }
 
 
-          function AddPagination(){
+          function InitPagination(){
             console.log('Pagination Added!');
             chart.renderer.button('<', chart.plotLeft - 60, chart.plotHeight + chart.plotTop, noop)
           .attr({
