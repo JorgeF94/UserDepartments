@@ -1,199 +1,259 @@
 document.addEventListener('DOMContentLoaded', () => {
-    Highcharts.chart('container', {
-        chart: {
-            backgroundColor: '#3f3b53',
-            type: 'column',
-            marginLeft: 100,
-            marginRight: 100
+  Highcharts.chart('container', {
+      chart: {
+          //backgroundColor: '#3f3b53',
+          type: 'column',
+          //marginLeft: 100,
+          //marginRight: 100
+        },
+        lang: {
+          thousandsSep: ','
+        },
+        legend: {
+          enabled: true,
+          symbolHeight: 8,
+          symbolWidth: 8,
+          symbolRadius: 4,
+          margin: 15,
+          backgroundColor: '#FFFFFF',
+          layout: 'horizontal',
+          itemDistance: 25,
+          symbolMargin: 10,
+          itemStyle: {
+            color: 'black',
+            fontWeight: 'normal'
+          }
+          
+        },
+        title: {
+          text: ''
+        },
+        xAxis: {
+          //min: 0,
+          //max: 2,
+          //tickWidth: 0,
+          categories: [
+            'Department 1',
+            'Department 2',
+            'Department 3',
+            'Department 4',
+            'Department 5',
+            'Department 6',
+            'Department 7',
+            'Department 8',
+            'Department 9',
+            'Department 10',
+            'Department 11',
+            'Department 12',
+            'Department 13',
+            'Department 14',
+            'Department 15',
+            'Department 16',
+            'Department 17',
+            'Department 18',
+            'Department 19',
+            'Department 20',
+            'Department 21',
+            'Department 22',
+            'Department 23',
+            'Department 24',
+            'Department 25',
+            'Department 26',
+            'Department 27',
+            'Department 28',
+            'Department 29',
+            'Department 30'
+          ],
+          labels: {
+              useHTML: true,
+              style: {
+                  color: '#366677',
+                  fontFamily: 'Frutiger, sans-serif',             
+                  fontWeight: 400,
+                  fontSize: '16px',    
+              },
+              formatter: function(){
+                  let truncatedValue = this.value;
+                              
+                  return `<div >${truncatedValue}</div>`;
+              },
           },
-          legend: {
-            symbolHeight: 8,
-            symbolWidth: 8,
-            symbolRadius: 4,
-            margin: 15,
-            backgroundColor: '#FFFFFF',
-            layout: 'horizontal',
-            itemDistance: 25,
-            symbolMargin: 10,
-            itemStyle: {
-              color: 'black',
-              fontWeight: 'normal'
-            }
-          },
+        },
+        yAxis: {
+          min: 0,
           title: {
             text: ''
           },
-          xAxis: {
-            min: 0,
-            max: 2,
-            categories: [
-              'JAN',
-              'FEB',
-              'MAR',
-              'APR',
-              'MAY',
-              'JUN',
-              'JUL',
-              'AUG',
-              'SEP',
-              'OCT',
-              'NOV',
-              'DEC'
-            ],
-            labels: {
+          //type: 'logarithmic',
+          labels: {
               style: {
-                color: '#FFFFFF'
+                  color: '#333333',
+                  fontFamily: 'Frutiger, sans-serif',             
+                  fontWeight: 400,
+                  fontSize: '16px',    
+              },
+              formatter: function() {
+                  return Highcharts.numberFormat(this.value, 0, '.', ',');
               }
-            },
-          },
-          yAxis: {
-            min: 0,
-            title: {
-              text: ''
+          } 
+        },
+        tooltip: {
+          backgroundColor: '#FFFFFF',
+          borderColor: '#FFFFFF',
+          borderRadius: 0,
+          borderWidth: 5,
+          formatter: function() {
+            return ' <b>' + this.y + '</b><br><b>' + this.series.name + '</b>';
+          }
+        },
+        plotOptions: {
+          /*column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+          }*/
+          series: {  
+            minPointLength: 1,
+            //cursor: " + If(CanSeeDrilldown, "'pointer'", "'default'") + ",
+            color: {
+                linearGradient: [0, 0, 500, 0],
+                stops: [
+                    [0, '#1F3A44'],
+                    [1, '#D1ECF6']
+                ]
             }
-          },
-          tooltip: {
-            backgroundColor: '#FFFFFF',
-            borderColor: '#FFFFFF',
-            borderRadius: 0,
-            borderWidth: 5,
-            formatter: function() {
-              return ' <b>' + this.y + '</b><br><b>' + this.series.name + '</b>';
-            }
-          },
-          plotOptions: {
-            column: {
-              pointPadding: 0.2,
-              borderWidth: 0
-            }
-          },
-          series: [{
-            name: 'Physical Medicine',
+        }
+        },
+        series: [{
+           // name: 'Department 1',
       
-            color: '#0099ff',
-            data: [90, 80, 85, 70, 80, 50, 88, 85, 20, 30, 40, 50]
+            //color: '#0099ff',
+            //data: [90]
       
-          }, {
-            name: 'Phychiatry',
-      
-            color: '#ff3399',
-            data: [80, 70, 85, 60, 50, 70, 38, 89, 70, 40, 20, 50]
-      
-          }, {
-            name: 'Otrhopedic Surgery',
-      
-            color: '#cc0000',
-            data: [88, 79, 81, 50, 40, 76, 31, 81, 65, 30, 29, 59]
-      
-          }, {
-            name: 'Nephrology',
-      
-            color: '#ff5c33',
-            data: [88, 89, 61, 60, 70, 36, 21, 51, 69, 39, 21, 51]
-      
-          }, {
-            name: 'Cardiology',
-      
-            color: '#ffa64d',
-            data: [18, 29, 31, 50, 40, 46, 81, 31, 89, 39, 81, 31]
-      
-          }, {
-            name: 'General Surgery',
-      
-            color: '#ffe066',
-            data: [28, 59, 61, 59, 49, 41, 31, 41, 81, 31, 87, 38]
-      
-          }, {
-            name: 'General Practise',
-      
-            color: '#a64dff',
-            data: [78, 69, 41, 89, 29, 81, 21, 11, 41, 35, 92, 89]
-      
-          }, {
-            name: 'Pulmanory Diesease',
-      
-            color: '#0066ff',
-            data: [58, 39, 49, 89, 39, 61, 25, 45, 23, 76, 42, 89]
-      
-          }]
-         
+          data: [957,
+            860, 
+            8565, 
+            745, 
+            80, 
+            564, 
+            8456, 
+            85, 
+            2650, 
+            30,
+            90,
+            123, 
+            85, 
+            1234, 
+            4556, 
+            540, 
+            88, 
+            865, 
+            20, 
+            4560,
+            90,
+            4645, 
+            865, 
+            7560, 
+            860, 
+            5560, 
+            8768, 
+            8789, 
+            270, 
+            360]
+    
+        }]
+       
+  },
+
+function(chart) { // on complete
+    function noop(){};
+      chart.renderer.button('<', chart.plotLeft - 60, chart.plotHeight + chart.plotTop, noop).addClass('left').add();
+  
+  
+      chart.renderer.button('>', chart.plotLeft + chart.plotWidth + 30, chart.plotHeight + chart.plotTop, noop).addClass('right').add();
+  
+      $('.left').click(function() {
+        chart.xAxis[0].setExtremes(0, 5);
+      });
+      $('.right').click(function() {
+        chart.xAxis[0].setExtremes(6, 11);
+      })
     }
 
-    ,function(chart) { 
-      
-        function noop(){};
-          console.log(chart); 
+  ,function(chart) { 
+    
+      function noop(){};
+        console.log(chart); 
 
-          var chartLength = chart.xAxis[0].categories.length;
-          console.log(chartLength);
-          var recordsPerPage = 3;
-          var currentPage = 0;
-          var auxMaxPage = chartLength/recordsPerPage;
-          var firstPage = 0;
-          var lastPage = Math.ceil(auxMaxPage) - 1;
-          var minExtreme = 0;
-          var maxExtreme = recordsPerPage;
-
-
-          if (lastPage > 0) {
-            InitPagination();
-            CheckPagination();
-          }
+        var chartLength = chart.xAxis[0].categories.length;
+        console.log(chartLength);
+        var recordsPerPage = 3;
+        var currentPage = 0;
+        var auxMaxPage = chartLength/recordsPerPage;
+        var firstPage = 0;
+        var lastPage = Math.ceil(auxMaxPage) - 1;
+        var minExtreme = 0;
+        var maxExtreme = recordsPerPage;
 
 
-          function InitPagination(){
-            console.log('Pagination Added!');
-            chart.renderer.button('<', chart.plotLeft - 60, chart.plotHeight + chart.plotTop, noop)
-          .attr({
-            id: 'btn1',
-            class: 'left',
-          })
-          .add();
+        if (lastPage > 0) {
+          InitPagination();
+          CheckPagination();
+        }
 
-          chart.renderer.button('>', chart.plotLeft + chart.plotWidth + 30, chart.plotHeight + chart.plotTop, noop)
-          .attr({
-            id: 'btn2',
-            class: 'right',
-          })
-          .add();
 
-          document.getElementById("btn1").addEventListener("click", function() {
-            currentPage = currentPage - 1;
-            goToPage(currentPage);
-            CheckPagination();
-          });
+        function InitPagination(){
+          console.log('Pagination Added!');
+          chart.renderer.button('<', chart.plotLeft - 60, chart.plotHeight + chart.plotTop, noop)
+        .attr({
+          id: 'btn1',
+          class: 'left',
+        })
+        .add();
 
-          document.getElementById("btn2").addEventListener("click", function() {
-            currentPage = currentPage + 1;
-            goToPage(currentPage);
-            CheckPagination();
-          });
-          
-          function goToPage(pagenumber){
-            minExtreme = pagenumber*recordsPerPage;
-            maxExtreme = minExtreme + recordsPerPage - 1;
-            chart.xAxis[0].setExtremes(minExtreme, maxExtreme);
-          }
+        chart.renderer.button('>', chart.plotLeft + chart.plotWidth + 30, chart.plotHeight + chart.plotTop, noop)
+        .attr({
+          id: 'btn2',
+          class: 'right',
+        })
+        .add();
 
-          }
-          function CheckPagination (){
-            //console.log('Pagination Checked! CurrentPage: ' + currentPage);
-            if (lastPage > 1) {
-              if (currentPage == firstPage) {
-                document.getElementById("btn1").style.display = 'none';
-                document.getElementById("btn2").style.display = "block";
-              } else
-              if(currentPage == lastPage){
-                document.getElementById("btn1").style.display = "block";
-                document.getElementById("btn2").style.display = 'none';
-              } else {
-                document.getElementById("btn1").style.display = 'block';
-                document.getElementById("btn2").style.display = "block";
-              }
-            } 
-          }
+        document.getElementById("btn1").addEventListener("click", function() {
+          currentPage = currentPage - 1;
+          goToPage(currentPage);
+          CheckPagination();
+        });
+
+        document.getElementById("btn2").addEventListener("click", function() {
+          currentPage = currentPage + 1;
+          goToPage(currentPage);
+          CheckPagination();
+        });
+        
+        function goToPage(pagenumber){
+          minExtreme = pagenumber*recordsPerPage;
+          maxExtreme = minExtreme + recordsPerPage - 1;
+          chart.xAxis[0].setExtremes(minExtreme, maxExtreme);
+        }
 
         }
-      
-    )
+        function CheckPagination (){
+          //console.log('Pagination Checked! CurrentPage: ' + currentPage);
+          if (lastPage > 1) {
+            if (currentPage == firstPage) {
+              document.getElementById("btn1").style.display = 'none';
+              document.getElementById("btn2").style.display = "block";
+            } else
+            if(currentPage == lastPage){
+              document.getElementById("btn1").style.display = "block";
+              document.getElementById("btn2").style.display = 'none';
+            } else {
+              document.getElementById("btn1").style.display = 'block';
+              document.getElementById("btn2").style.display = "block";
+            }
+          } 
+        }
+
+      }
+    
+  )
 });
