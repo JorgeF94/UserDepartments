@@ -11,30 +11,36 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         legend: {
           enabled: true,
-          symbolHeight: 8,
-          symbolWidth: 8,
-          symbolRadius: 4,
-          margin: 15,
-          backgroundColor: '#FFFFFF',
-          layout: 'horizontal',
-          itemDistance: 25,
-          symbolMargin: 10,
-          itemStyle: {
+          useHTML: true,
+          //x: -20,
+          //y: -10,
+          labelFormatter: function() {
+            return ' <b>' + "dasdasda" + '</b><br><b>' + 'sadasdadasddsa' + '</b>';
+          },
+          //enabled: true,
+          //symbolHeight: 8,
+          //symbolWidth: 8,
+          //symbolRadius: 4,
+          //margin: 15,
+          //backgroundColor: '#FFFFFF',
+          //layout: 'horizontal',
+          //itemDistance: 25,
+          //symbolMargin: 10,
+          /*itemStyle: {
             color: 'black',
             fontWeight: 'normal'
-          }
-          
+          },*/
         },
         title: {
           text: ''
         },
         xAxis: {
-          //min: 0,
-          //max: 2,
+          min: 0,
+          max: 9,
           //tickWidth: 0,
           categories: [
-            'Department 1',
-            'Department 2',
+            'Department 1 aGDFAHGSDFJHGASVDJHASVDJHASVDHASV',
+            'Department 2 dasdsadasdasdasdasdsadasdasdasdasdasdasdasdasdasdasdasdsadasdsa',
             'Department 3',
             'Department 4',
             'Department 5',
@@ -74,17 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
               },
               formatter: function(){
                   let truncatedValue = this.value;
+                  if(truncatedValue.length>12){
+                    truncatedValue = truncatedValue.substring(0, 12) + '...'
+                  }
                               
                   return `<div >${truncatedValue}</div>`;
               },
           },
         },
         yAxis: {
-          min: 0,
+          type: 'logarithmic',
           title: {
             text: ''
           },
-          //type: 'logarithmic',
+
           labels: {
               style: {
                   color: '#333333',
@@ -92,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   fontWeight: 400,
                   fontSize: '16px',    
               },
-              formatter: function() {
+              Formatter: function() {
                   return Highcharts.numberFormat(this.value, 0, '.', ',');
               }
           } 
@@ -114,21 +123,23 @@ document.addEventListener('DOMContentLoaded', () => {
           series: {  
             minPointLength: 1,
             //cursor: " + If(CanSeeDrilldown, "'pointer'", "'default'") + ",
+            dataLabels: {
+              enabled: false
+            },
+            borderRadius: {
+              radius: 4
+            },
             color: {
                 linearGradient: [0, 0, 500, 0],
                 stops: [
-                    [0, '#1F3A44'],
-                    [1, '#D1ECF6']
+                    [0, '#7A3803'],
+                    [1, '#FCAE1E']
                 ]
             }
         }
         },
         series: [{
-           // name: 'Department 1',
-      
-            //color: '#0099ff',
-            //data: [90]
-      
+          showInLegend: false,
           data: [957,
             860, 
             8565, 
@@ -158,26 +169,11 @@ document.addEventListener('DOMContentLoaded', () => {
             8768, 
             8789, 
             270, 
-            360]
-    
+            360],
+            
         }]
        
-  },
-
-function(chart) { // on complete
-    function noop(){};
-      chart.renderer.button('<', chart.plotLeft - 60, chart.plotHeight + chart.plotTop, noop).addClass('left').add();
-  
-  
-      chart.renderer.button('>', chart.plotLeft + chart.plotWidth + 30, chart.plotHeight + chart.plotTop, noop).addClass('right').add();
-  
-      $('.left').click(function() {
-        chart.xAxis[0].setExtremes(0, 5);
-      });
-      $('.right').click(function() {
-        chart.xAxis[0].setExtremes(6, 11);
-      })
-    }
+  }
 
   ,function(chart) { 
     
@@ -186,31 +182,60 @@ function(chart) { // on complete
 
         var chartLength = chart.xAxis[0].categories.length;
         console.log(chartLength);
-        var recordsPerPage = 3;
+        var recordsPerPage = 10;
         var currentPage = 0;
         var auxMaxPage = chartLength/recordsPerPage;
         var firstPage = 0;
         var lastPage = Math.ceil(auxMaxPage) - 1;
+        console.log(lastPage);
+        console.log(firstPage);
         var minExtreme = 0;
         var maxExtreme = recordsPerPage;
 
 
         if (lastPage > 0) {
           InitPagination();
+         // InitPaginationNumbers();
           CheckPagination();
+        }
+        
+        function InitPaginationNumbers(){
+          var centerX = this.plotWidth / 2;
+          var centerY = this.plotHeight / 2;
+          chart.renderer.text('The dotted line represents ...', 
+          /*x*/centerX, 
+          /*y*/centerY)
+          .css({
+              fontSize: '13px',
+              color: '#666666'
+          })
+          
+          .attr({
+            id: 'pagn1',
+            class: 'middlepag',
+          })
+          .add();
+
+          var labelBox = label.getBBox();
+                label.translate(centerX - labelBox.width / 2, centerY - labelBox.height / 2);
+
+
         }
 
 
         function InitPagination(){
           console.log('Pagination Added!');
-          chart.renderer.button('<', chart.plotLeft - 60, chart.plotHeight + chart.plotTop, noop)
+          chart.renderer.button('<', chart.plotLeft - 65, chart.plotHeight + chart.plotTop +40, noop)
         .attr({
           id: 'btn1',
           class: 'left',
         })
         .add();
-
-        chart.renderer.button('>', chart.plotLeft + chart.plotWidth + 30, chart.plotHeight + chart.plotTop, noop)
+        var centerXAux = this.plotWidth / 2;
+        var centerYAux = this.plotHeight / 2;
+        console.log(chart.plotHeight + chart.plotTop + 40);
+        console.log(this.plotHeight);
+        chart.renderer.button('>', chart.plotLeft + chart.plotWidth - 15, /*chart.plotHeight + chart.plotTop + 40*/this.plotHeight / 2, noop)
         .attr({
           id: 'btn2',
           class: 'right',
@@ -238,19 +263,29 @@ function(chart) { // on complete
         }
         function CheckPagination (){
           //console.log('Pagination Checked! CurrentPage: ' + currentPage);
-          if (lastPage > 1) {
+          console.log(lastPage);
+          console.log(firstPage);
+          console.log(currentPage);
+          if (lastPage > 0) {
             if (currentPage == firstPage) {
+              console.log('1');
               document.getElementById("btn1").style.display = 'none';
               document.getElementById("btn2").style.display = "block";
             } else
             if(currentPage == lastPage){
+              console.log('2');
               document.getElementById("btn1").style.display = "block";
               document.getElementById("btn2").style.display = 'none';
             } else {
+              console.log('3');
               document.getElementById("btn1").style.display = 'block';
               document.getElementById("btn2").style.display = "block";
             }
-          } 
+          } else {
+            console.log('4');
+            document.getElementById("btn1").style.display = 'none';
+            document.getElementById("btn2").style.display = "none";
+          }
         }
 
       }

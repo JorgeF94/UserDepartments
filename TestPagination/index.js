@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           function CheckPagination (){
             //console.log('Pagination Checked! CurrentPage: ' + currentPage);
-            if (lastPage > 1) {
+            if (lastPage > 0) {
               if (currentPage == firstPage) {
                 document.getElementById("btn1").style.display = 'none';
                 document.getElementById("btn2").style.display = "block";
