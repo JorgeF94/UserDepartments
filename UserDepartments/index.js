@@ -195,37 +195,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (lastPage > 0) {
           InitPagination();
-         // InitPaginationNumbers();
           CheckPagination();
         }
-        
-        function InitPaginationNumbers(){
-          var centerX = this.plotWidth / 2;
-          var centerY = this.plotHeight / 2;
-          chart.renderer.text('The dotted line represents ...', 
-          /*x*/centerX, 
-          /*y*/centerY)
-          .css({
-              fontSize: '13px',
-              color: '#666666'
-          })
-          
-          .attr({
-            id: 'pagn1',
-            class: 'middlepag',
-          })
-          .add();
-
-          var labelBox = label.getBBox();
-                label.translate(centerX - labelBox.width / 2, centerY - labelBox.height / 2);
-
-
-        }
-
 
         function InitPagination(){
           console.log('Pagination Added!');
-          chart.renderer.button('<', chart.plotLeft - 65, chart.plotHeight + chart.plotTop +40, noop)
+          chart.renderer.button('<', chart.plotLeft - 60, chart.plotHeight + chart.plotTop +40, noop)
         .attr({
           id: 'btn1',
           class: 'left',
@@ -235,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var centerYAux = this.plotHeight / 2;
         console.log(chart.plotHeight + chart.plotTop + 40);
         console.log(this.plotHeight);
-        chart.renderer.button('>', chart.plotLeft + chart.plotWidth - 15, /*chart.plotHeight + chart.plotTop + 40*/this.plotHeight / 2, noop)
+        chart.renderer.button('>', chart.plotLeft + chart.plotWidth - 15, chart.plotHeight + chart.plotTop + 40, noop)
         .attr({
           id: 'btn2',
           class: 'right',
