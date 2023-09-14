@@ -1,0 +1,59 @@
+.my-div {
+    width: 660px;
+    height: 420px;
+    background-color: #f0f0f0; /* Cor de fundo (opcional) */
+    /* Outros estilos CSS podem ser adicionados aqui */
+}
+.my2-div {
+    width: 1370px;
+    height: 590px;
+    background-color: #f0f0f0; /* Cor de fundo (opcional) */
+    /* Outros estilos CSS podem ser adicionados aqui */
+}
+.tooltip-header {
+display: block;
+font-size: 14px;
+margin-bottom: 4px;
+width: 100%; 
+}
+.tooltip-header > div {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+-webkit-box-orient: horizontal;
+-webkit-box-direction: normal;
+-ms-flex-direction: row;
+flex-direction: row;
+width: 100%;
+-webkit-box-flex: 1;
+-ms-flex: 1;
+flex: 1; }
+.tooltip-item > div {
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex; }
+
+.tooltip-item > span:not(:first-child) {
+-webkit-box-flex: 1;
+-ms-flex: 1;
+flex: 1;
+text-align: right; }
+
+.highcharts-tooltip-circle {
+display: inline-block;
+border-radius: var(--border-radius-circle);
+height: 8px;
+margin-right: var(--space-xs);
+width: 8px; }
+.tooltip-circle {
+width: 8px;
+height: 8px;
+display: block;
+margin-right: 4px;
+border-radius: 50%; }
