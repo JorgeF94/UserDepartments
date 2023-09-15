@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   )
 });
-export default function minhaFuncao() {
+function minhaFuncao() {
   // Coloque aqui o código da sua função JavaScript
  // console.log("Inicializado ficheiro");
   alert("A função JavaScript foi chamada!");
