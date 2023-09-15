@@ -1,15 +1,4 @@
-.my-div {
-    width: 660px;
-    height: 420px;
-    background-color: #f0f0f0; /* Cor de fundo (opcional) */
-    /* Outros estilos CSS podem ser adicionados aqui */
-}
-.my2-div {
-    width: 1370px;
-    height: 590px;
-    background-color: #f0f0f0; /* Cor de fundo (opcional) */
-    /* Outros estilos CSS podem ser adicionados aqui */
-}
+
 .tooltip-header {
 display: block;
 font-size: 14px;
@@ -57,3 +46,23 @@ height: 8px;
 display: block;
 margin-right: 4px;
 border-radius: 50%; }
+
+
+  .layout-native .card{
+    padding:var(--space-base);
+  }
+  /*! 6.2.6. Card Background */
+  .card-background{
+    -webkit-box-align:center;
+        -ms-flex-align:center;
+            align-items:center;
+    border-radius:var(--border-radius-soft);
+    color:var(--color-neutral-0);
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    overflow:hidden;
+    padding:var(--space-m);
+    position:relative;
+  }
+  

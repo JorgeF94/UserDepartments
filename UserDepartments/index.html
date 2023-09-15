@@ -11,13 +11,96 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Hichcharts</title>
 
+    <style>
+        body {
+            background-color: #dedede; /* Azul claro (pode usar outras cores também) */
+        }
+        .pagination {
+            text-align: center; /* Centraliza horizontalmente */
+            margin: 10px;
+        }
+
+        .pagination a {
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin: 0 5px; /* Adiciona margem horizontal entre os elementos */
+        }
+
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+
+        .pagination .active {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .outer-div {
+            background-color: #ccc;
+        }
+
+        .inner-div {
+            background-color: #dedede;
+            padding: 10px;
+        }
+
+        .card {
+            background-color: #fff; /* Cor de fundo */
+            border: 1px solid #ddd; /* Borda */
+            border-radius: 8px; /* Cantos arredondados */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            padding: 28px; /* Espaçamento interno */
+            margin: 10px; /* Margem externa */
+            width: 100%; /* Ocupa toda a largura do elemento pai */
+            height: 100%;
+        }
+        .my-chart {
+            width: 628px;
+            height: 350px;
+            /* Outros estilos CSS podem ser adicionados aqui */
+        }
+        .my-div {
+            width: 660px; /* Largura máxima */
+            height: 430px;
+            /* Outros estilos CSS podem ser adicionados aqui */
+        }
+        .my2-div {
+            width: 1370px;
+            height: 590px;
+            background-color: #f0f0f0; /* Cor de fundo (opcional) */
+            /* Outros estilos CSS podem ser adicionados aqui */
+        }
+        
+        /*<script type="module">
+        import { minhaFuncao } from './indexx.js';
+    </script>*/
+
+    </style>
 </head>
 <body>
-   
-    <div id="container" class="my-div" data-lp="charts"></div>
+    <script src="highcharts.mjs" type="module"></script>
+    <script src="index.js"></script>
     
+    <h1>Chart Samples</h1>
+    <p>List of chart samples.</p>
+    <div class="inner-div">
+        <div class="my-div card" >
+            <h2>Top departments</h2>
+            <div id="container" class="my-chart" data-lp="charts"></div>
+                <div class="pagination">
+                    <a href="#" class="prev">&#8249;</a>
+                    <a href="#" onclick="goToPage(1); return false;" class="page">1</a>
+                    <a href="#" class="page">2</a>
+                    <a href="#" class="page">3</a>
+                    <a href="#" class="page">4</a>
+                    <a href="#" class="page">5</a>
+                    <a href="#" onclick="minhaFuncao(); return false;" class="next">&#8250;</a>
+                </div>
+        </div>
+    </div>
 
-<script src="index.js"></script>
-
+    
+    
 </body>
 </html>
