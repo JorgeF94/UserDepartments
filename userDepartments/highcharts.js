@@ -142,12 +142,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lastPage > 0) {
       InitPagination();
-      //CheckPagination();
+      CheckPagination();
     }
 
     function InitPagination(){
 
-      // Cria o elemento "prev"
+      // Cria o element "prev"
       const prevLink = document.createElement("a");
       prevLink.setAttribute("id", "btn1");
       prevLink.href = "#";
@@ -155,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
       prevLink.textContent = "‹"; // Unicode para seta para a esquerda
       prevLink.onclick = function () {
         currentPage = currentPage - 1;
-        console.log("Navegando para a página anterior");
         goToPage(currentPage);
         return false;
       };
@@ -166,7 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 0; i <= lastPage; i++) {
         const pageLink = document.createElement("a");
         pageLink.href = "#";
+        pageLink.setAttribute("id", "page"+i);
         pageLink.classList.add("page");
+        if(i==0){ 
+          addClass(pageLink,"active");
+        }
         pageLink.textContent = i + 1;
         pageLink.onclick = function () {
           goToPage(i);
@@ -176,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pageLinksContainer.appendChild(pageLink);
       }
 
-      // Cria o elemento "next"
+      // Cria o element "next"
       const nextLink = document.createElement("a");
       nextLink.setAttribute("id", "btn2");
       nextLink.href = "#";
@@ -184,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
       nextLink.textContent = "›"; // Unicode para seta para a direita
       nextLink.onclick = function () {
         currentPage = currentPage + 1;
-        console.log("Navegando para a próxima página");
         goToPage(currentPage);
         return false;
       };
@@ -198,7 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
     currentPage = pageNumber;
     minExtreme = pageNumber * recordsPerPage;
     maxExtreme = minExtreme + recordsPerPage - 1;
-    console.log("Navegando para a página " + pageNumber);
+    for (let i = 0; i <= lastPage; i++) {
+      removeClass(document.getElementById("page"+i), "active");
+    }
+    addClass(document.getElementById("page"+pageNumber), "active");
     chart.xAxis[0].setExtremes(minExtreme, maxExtreme);
     CheckPagination();
   }
@@ -207,104 +212,41 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lastPage > 0) {
       if (currentPage == firstPage) {
         document.getElementById("btn1").style.display = 'none';
-        document.getElementById("btn2").style.display = "block";
+        removeStyle(document.getElementById("btn2"), "display")
       } else
       if(currentPage == lastPage){
-        document.getElementById("btn1").style.display = "block";
+        removeStyle(document.getElementById("btn1"), "display")
         document.getElementById("btn2").style.display = 'none';
       } else {
-        document.getElementById("btn1").style.display = 'block';
-        document.getElementById("btn2").style.display = "block";
+        removeStyle(document.getElementById("btn1"), "display")
+        removeStyle(document.getElementById("btn2"), "display")
       }
     } else {
       document.getElementById("btn1").style.display = 'none';
       document.getElementById("btn2").style.display = "none";
     }
   }
+  function removeStyle(element, style) {
+    if (element && element.style) {
+      element.style[style] = "";
+    }
+  }
+  function addClass(element, CssClass) {
+    // Verifique se o element existe
+    if (element && element.classList) {
+      // Use o método add() para adicionar a CssClass
+      element.classList.add(CssClass);
+      }
+  }
+  function removeClass(element, CssClass) {
+    // Verifique se o element existe
+    if (element && element.classList) {
+      // Use o método add() para remover a CssClass
+     element.classList.remove(CssClass);
+   }
+  }
+
 }
-
-
-/*  function(chart) { 
-    
-      function noop(){};
-
-        var chartLength = chart.xAxis[0].categories.length;
-        var recordsPerPage = 15;
-        var currentPage = 0;
-        var auxMaxPage = chartLength/recordsPerPage;
-        var firstPage = 0;
-        var lastPage = Math.ceil(auxMaxPage) - 1;
-        var minExtreme = 0;
-        var maxExtreme = recordsPerPage;
-
-
-        if (lastPage > 0) {
-          InitPagination();
-          CheckPagination();
-        }
-
-        function goToPage(pagenumber){
-          minExtreme = pagenumber*recordsPerPage;
-          maxExtreme = minExtreme + recordsPerPage - 1;
-          chart.xAxis[0].setExtremes(minExtreme, maxExtreme);
-        }
-
-        function InitPagination(){
-
-          chart.renderer.button('<', chart.plotLeft - 60, chart.plotHeight + chart.plotTop + 40, noop)
-        .attr({
-          id: 'btn1',
-          class: 'left',
-        })
-        .add();
-
-        chart.renderer.button('>', chart.plotLeft + chart.plotWidth - 15, chart.plotHeight + chart.plotTop + 40, noop)
-        .attr({
-          id: 'btn2',
-          class: 'right',
-        })
-        .add();
-
-        document.getElementById("btn1").addEventListener("click", function() {
-          currentPage = currentPage - 1;
-          goToPage(currentPage);
-          CheckPagination();
-        });
-
-        document.getElementById("btn2").addEventListener("click", function() {
-          currentPage = currentPage + 1;
-          goToPage(currentPage);
-          CheckPagination();
-        });
-
-        }
-        function CheckPagination (){
-          if (lastPage > 0) {
-            if (currentPage == firstPage) {
-              document.getElementById("btn1").style.display = 'none';
-              document.getElementById("btn2").style.display = "block";
-            } else
-            if(currentPage == lastPage){
-              document.getElementById("btn1").style.display = "block";
-              document.getElementById("btn2").style.display = 'none';
-            } else {
-              document.getElementById("btn1").style.display = 'block';
-              document.getElementById("btn2").style.display = "block";
-            }
-          } else {
-            document.getElementById("btn1").style.display = 'none';
-            document.getElementById("btn2").style.display = "none";
-          }
-        }
-
-      }*/
-  )
+)
 });
-/*
-  console.log(recordsPerPage);
-
-  console.log(pagenumber);
-  console.log(minExtreme);
-  console.log(maxExtreme);
-  */
 
