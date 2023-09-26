@@ -71,16 +71,11 @@
             background-color: #f0f0f0; /* Cor de fundo (opcional) */
             /* Outros estilos CSS podem ser adicionados aqui */
         }
-        
-        /*<script type="module">
-        import { minhaFuncao } from './indexx.js';
-    </script>*/
 
     </style>
 </head>
 <body>
     <script src="highcharts.js"></script>
-    <script src="index.js"></script>
     
     <h1>Chart Samples</h1>
     <p>List of chart samples.</p>
@@ -88,15 +83,9 @@
         <div class="my-div card" >
             <h2>Top departments</h2>
             <div id="container" class="my-chart" data-lp="charts"></div>
-                <div class="pagination">
-                    <a href="#" class="prev">&#8249;</a>
-                    <a href="#" onclick="goToPage(1); return false;" class="page">1</a>
-                    <a href="#" class="page">2</a>
-                    <a href="#" class="page">3</a>
-                    <a href="#" class="page">4</a>
-                    <a href="#" class="page">5</a>
-                    <a href="#" onclick="minhaFuncao(); return false;" class="next">&#8250;</a>
-                </div>
+            <div class="pagination">
+                <div id="pageLinks"></div>
+            </div>
         </div>
     </div>
 

@@ -1,7 +1,7 @@
-let chart;
+var chart;
 
 document.addEventListener('DOMContentLoaded', () => {
-  let chart =  Highcharts.chart('container', {
+  chart = Highcharts.chart('container', {
       chart: {
           //backgroundColor: '#3f3b53',
           type: 'column',
@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
           borderRadius: 0,
           borderWidth: 5,
           formatter: function() {
-            console.log(this);
             return ' <b>' + this.y + '</b><br><b>' + this.x + '</b>';
           }
         },
@@ -124,22 +123,117 @@ document.addEventListener('DOMContentLoaded', () => {
         }]
        
   }
-
+  
   ,
-  function(chart) { 
+
+  // Função para criar os links das páginas
+  function createPagination(chart) {
+    
+    var chartLength = chart.xAxis[0].categories.length;
+    var recordsPerPage = 15;
+    var currentPage = 0;
+    var auxMaxPage = chartLength/recordsPerPage;
+    var firstPage = 0;
+    var lastPage = Math.ceil(auxMaxPage) - 1;
+    var minExtreme = 0;
+    var maxExtreme = recordsPerPage;
+
+    const pageLinksContainer = document.getElementById("pageLinks");
+
+    if (lastPage > 0) {
+      InitPagination();
+      //CheckPagination();
+    }
+
+    function InitPagination(){
+
+      // Cria o elemento "prev"
+      const prevLink = document.createElement("a");
+      prevLink.setAttribute("id", "btn1");
+      prevLink.href = "#";
+      prevLink.classList.add("prev");
+      prevLink.textContent = "‹"; // Unicode para seta para a esquerda
+      prevLink.onclick = function () {
+        currentPage = currentPage - 1;
+        console.log("Navegando para a página anterior");
+        goToPage(currentPage);
+        return false;
+      };
+
+      pageLinksContainer.appendChild(prevLink);
+
+      // Cria os links das páginas numeradas
+      for (let i = 0; i <= lastPage; i++) {
+        const pageLink = document.createElement("a");
+        pageLink.href = "#";
+        pageLink.classList.add("page");
+        pageLink.textContent = i + 1;
+        pageLink.onclick = function () {
+          goToPage(i);
+          return false;
+        };
+
+        pageLinksContainer.appendChild(pageLink);
+      }
+
+      // Cria o elemento "next"
+      const nextLink = document.createElement("a");
+      nextLink.setAttribute("id", "btn2");
+      nextLink.href = "#";
+      nextLink.classList.add("next");
+      nextLink.textContent = "›"; // Unicode para seta para a direita
+      nextLink.onclick = function () {
+        currentPage = currentPage + 1;
+        console.log("Navegando para a próxima página");
+        goToPage(currentPage);
+        return false;
+      };
+
+      pageLinksContainer.appendChild(nextLink);
+    
+    }
+
+  // Função para ir para uma página específica
+  function goToPage(pageNumber) {
+    currentPage = pageNumber;
+    minExtreme = pageNumber * recordsPerPage;
+    maxExtreme = minExtreme + recordsPerPage - 1;
+    console.log("Navegando para a página " + pageNumber);
+    chart.xAxis[0].setExtremes(minExtreme, maxExtreme);
+    CheckPagination();
+  }
+
+  function CheckPagination (){
+    if (lastPage > 0) {
+      if (currentPage == firstPage) {
+        document.getElementById("btn1").style.display = 'none';
+        document.getElementById("btn2").style.display = "block";
+      } else
+      if(currentPage == lastPage){
+        document.getElementById("btn1").style.display = "block";
+        document.getElementById("btn2").style.display = 'none';
+      } else {
+        document.getElementById("btn1").style.display = 'block';
+        document.getElementById("btn2").style.display = "block";
+      }
+    } else {
+      document.getElementById("btn1").style.display = 'none';
+      document.getElementById("btn2").style.display = "none";
+    }
+  }
+}
+
+
+/*  function(chart) { 
     
       function noop(){};
-        console.log(chart); 
 
         var chartLength = chart.xAxis[0].categories.length;
-        console.log(chartLength);
         var recordsPerPage = 15;
         var currentPage = 0;
         var auxMaxPage = chartLength/recordsPerPage;
         var firstPage = 0;
         var lastPage = Math.ceil(auxMaxPage) - 1;
-        console.log(lastPage);
-        console.log(firstPage);
         var minExtreme = 0;
         var maxExtreme = recordsPerPage;
 
@@ -147,6 +241,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lastPage > 0) {
           InitPagination();
           CheckPagination();
+        }
+
+        function goToPage(pagenumber){
+          minExtreme = pagenumber*recordsPerPage;
+          maxExtreme = minExtreme + recordsPerPage - 1;
+          chart.xAxis[0].setExtremes(minExtreme, maxExtreme);
         }
 
         function InitPagination(){
@@ -176,47 +276,35 @@ document.addEventListener('DOMContentLoaded', () => {
           goToPage(currentPage);
           CheckPagination();
         });
-        
-        function goToPage(pagenumber){
-          minExtreme = pagenumber*recordsPerPage;
-          maxExtreme = minExtreme + recordsPerPage - 1;
-          chart.xAxis[0].setExtremes(minExtreme, maxExtreme);
-        }
 
         }
         function CheckPagination (){
-          //console.log('Pagination Checked! CurrentPage: ' + currentPage);
-          console.log(lastPage);
-          console.log(firstPage);
-          console.log(currentPage);
           if (lastPage > 0) {
             if (currentPage == firstPage) {
-              console.log('1');
               document.getElementById("btn1").style.display = 'none';
               document.getElementById("btn2").style.display = "block";
             } else
             if(currentPage == lastPage){
-              console.log('2');
               document.getElementById("btn1").style.display = "block";
               document.getElementById("btn2").style.display = 'none';
             } else {
-              console.log('3');
               document.getElementById("btn1").style.display = 'block';
               document.getElementById("btn2").style.display = "block";
             }
           } else {
-            console.log('4');
             document.getElementById("btn1").style.display = 'none';
             document.getElementById("btn2").style.display = "none";
           }
         }
 
-      }
+      }*/
   )
 });
-function minhaFuncao() {
-  // Coloque aqui o código da sua função JavaScript
- // console.log("Inicializado ficheiro");
-  alert("A função JavaScript foi chamada!");
-};
-//export { chart };
+/*
+  console.log(recordsPerPage);
+
+  console.log(pagenumber);
+  console.log(minExtreme);
+  console.log(maxExtreme);
+  */
+
